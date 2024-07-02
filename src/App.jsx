@@ -1,8 +1,14 @@
-import { useState } from "react";
+import Content from "./components/Content";
+import Resume from "./components/Resume";
 import "./App.css";
 
 function App() {
-  return;
+  return (
+    <>
+      <Content />
+      <Resume />
+    </>
+  );
 }
 
 export default App;
