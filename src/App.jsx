@@ -6,6 +6,11 @@ import "./App.css";
 
 function App() {
   const [formData, setFormData] = useState(formInformation);
+  const [isActive, setIsActive] = useState(true);
+
+  function onButtonClick() {
+    setIsActive(!isActive);
+  }
 
   function handleInputChange(sectionId, fieldId, value) {
     const updatedFormData = formData.map((section) => {
@@ -25,8 +30,13 @@ function App() {
 
   return (
     <>
-      <Content formData={formData} onInputChange={handleInputChange} />
-      <Resume formData={formData} />
+      <Content
+        isActive={isActive}
+        onButtonClick={onButtonClick}
+        formData={formData}
+        onInputChange={handleInputChange}
+      />
+      <Resume isActive={isActive} formData={formData} />
     </>
   );
 }
