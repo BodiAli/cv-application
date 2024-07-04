@@ -1,15 +1,44 @@
+import plusIcon from "../assets/plus-icon.svg";
 import "../styles/Section.css";
 
-function Section({ information }) {
+function Input({ id, type, autoComplete, value, onChange }) {
   return (
-    <section>
-      <h2>{information.title}</h2>
-      {information.fields.map((field, index) => {
+    <input
+      className="input"
+      id={id}
+      type={type}
+      autoComplete={autoComplete}
+      value={value}
+      onChange={onChange}
+    ></input>
+  );
+}
+
+function Section({ section, onInputChange }) {
+  return (
+    <section className="section">
+      <h2 className="section-header">{section.title}</h2>
+      {section.fields.map((field) => {
         return (
-          <label key={index}>
-            {field.label}
-            <input defaultValue={!Array.isArray(field.value) ? field.value : "kool"} type="text" />
-          </label>
+          <div key={field.id} className="field-container">
+            <label htmlFor={field.id}>{field.label}</label>
+            <div className="add-list-container">
+              <Input
+                id={field.id}
+                type={field.type}
+                autoComplete={field.autoComplete}
+                value={field.value}
+                onChange={(e) => {
+                  onInputChange(section.id, field.id, e.target.value);
+                }}
+              />
+              {field.canAdd && (
+                <button className="add-list-button">
+                  <img src={plusIcon} alt="Add List" />
+                </button>
+              )}
+            </div>
+          </div>
         );
       })}
     </section>
