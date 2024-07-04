@@ -1,0 +1,10 @@
+.resume {
+  position: absolute;
+  top: 0;
+  transform: translateY(-100%);
+  border: 2px solid black;
+}
+
+.resume-container > h2 {
+  color: red;
+}

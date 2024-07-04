@@ -1,1 +1,64 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
 
+.section-header {
+  font-family: "Roboto Slab", sans-serif;
+  font-weight: 500;
+  font-size: 1.2rem;
+  background-color: #c6c6b8;
+  padding: 1rem;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.field-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.field-container > label {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+}
+
+.input {
+  padding: 0.5rem;
+  border: none;
+  border-radius: 2px;
+  outline: 2px solid #f2f3cc;
+}
+
+.add-list-container {
+  display: flex;
+  gap: 5px;
+}
+
+.add-list-container > input {
+  flex-grow: 1;
+}
+
+.add-list-button {
+  border: none;
+  border-radius: 5px;
+  background-color: #005b4b;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-list-button:hover {
+  background-color: #019c80;
+}
+
+.add-list-button:active {
+  background-color: #014135;
+}
+
+.add-list-button > img {
+  width: 20px;
+}

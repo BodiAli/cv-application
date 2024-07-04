@@ -1,5 +1,30 @@
-main {
+.content {
   background-color: #fffff0;
-  height: 100vh;
-  padding: 2rem;
+}
+
+.header {
+  background-color: #005b4b;
+}
+
+.view-cv {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f2f3cc;
+  padding: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.view-cv > h2 {
+  font-weight: 700;
+}
+
+.view-cv:hover {
+  background-color: #f3f4e1;
+  color: #373829;
+}
+
+.view-cv:active {
+  background-color: #dadcb2;
 }
