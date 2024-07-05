@@ -38,6 +38,27 @@
   background-color: #dadcb2;
 }
 
+.save-changes {
+  font-family: "Roboto", sans-serif;
+  font-style: italic;
+  font-size: 1rem;
+  font-weight: 700;
+  align-self: center;
+  padding: 1rem;
+  border: none;
+  border-radius: 5px;
+  background-color: #f2f3cc;
+  cursor: pointer;
+}
+
+.save-changes:hover {
+  background-color: #b4b58d;
+}
+
+.save-changes:active {
+  background-color: #d2d399;
+}
+
 .hamburger {
   position: relative;
   display: block;
@@ -66,7 +87,7 @@
 }
 
 .hamburger.is-active::after {
-  transform: rotate(45deg) translate(-5px, -6px);
+  transform: rotate(45deg) translate(-6px, -6px);
 }
 
 .hamburger.is-active .bar {
