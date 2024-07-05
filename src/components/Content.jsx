@@ -1,8 +1,7 @@
 import Section from "./Section";
 import "../styles/Content.css";
 
-
-function Content({ formData, onInputChange, onButtonClick, isActive }) {
+function Content({ formData, onInputChange, onButtonClick, onFormSubmit, isActive }) {
   return (
     <>
       <header className="header">
@@ -16,11 +15,16 @@ function Content({ formData, onInputChange, onButtonClick, isActive }) {
         </div>
       </header>
       <main className="content">
-        <div className="container">
-          {formData.map((section) => {
-            return <Section key={section.id} section={section} onInputChange={onInputChange} />;
-          })}
-        </div>
+        <form onSubmit={onFormSubmit}>
+          <div className="container">
+            {formData.map((section) => {
+              return <Section key={section.id} section={section} onInputChange={onInputChange} />;
+            })}
+            <button className="save-changes" type="submit">
+              Save Changes
+            </button>
+          </div>
+        </form>
       </main>
     </>
   );
