@@ -53,7 +53,7 @@ const formInformation = [
       {
         id: crypto.randomUUID(),
         label: "Major Achievements or Honors",
-        value: "Graduated Magna Cum Laude",
+        value: [],
         type: "text",
         autoComplete: "section-achievements",
         canAdd: true,
@@ -81,14 +81,14 @@ const formInformation = [
       {
         id: crypto.randomUUID(),
         label: "Date",
-        value: "Date from and until when you worked for that company (e.g., September 2018 - December 2020)",
+        value: "Date from - To, (e.g., September 2018 - December 2020)",
         type: "text",
         autoComplete: "section-date",
       },
       {
         id: crypto.randomUUID(),
         label: "Main Responsibilities",
-        value: "Enter Responsibilities",
+        value: [],
         type: "text",
         autoComplete: "section-responsibilities",
         canAdd: true,
@@ -98,4 +98,14 @@ const formInformation = [
   },
 ];
 
-export default formInformation;
+const educationArray = [
+  [
+    { value: "New York University", id: formInformation[1].fields[0].id },
+    { value: "Bachelor of Arts in Economics", id: formInformation[1].fields[1].id },
+    { value: "September 2015 - June 2017", id: formInformation[1].fields[2].id },
+    { value: [], id: formInformation[1].fields[3].id },
+  ],
+];
+const experienceArray = [];
+
+export { educationArray, experienceArray, formInformation as default };
