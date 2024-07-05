@@ -1,10 +1,81 @@
+.resume::-webkit-scrollbar {
+  width: 5px;
+}
+.resume::-webkit-scrollbar-track {
+  background-color: #f2f3cc;
+}
+.resume::-webkit-scrollbar-thumb {
+  background-color: #005b4b;
+}
+
 .resume {
   position: fixed;
   top: 0;
-  border: 2px solid black;
   z-index: 1;
   transition: transform 300ms ease-in-out;
-  background-color: #fffff0;
+  background-color: #f2f3cc;
+  height: calc(100vh - 78px);
+  overflow-y: auto;
+  display: flex;
+}
+
+.resume-container {
+  display: flex;
+  flex-direction: column;
+  padding: 0.8rem 2rem;
+  gap: 20px;
+  font-family: "Roboto", sans-serif;
+  scrollbar-width: thin;
+  scrollbar-color: #005b4b #f2f3cc;
+}
+
+.resume-container img {
+  width: 20px;
+}
+
+.resume-section-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.resume-section-container > h2 {
+  font-family: "Roboto Slab", sans-serif;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.personal-details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.personal-details > h2 {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 500;
+  font-family: "Roboto Slab", sans-serif;
+}
+
+.personal-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.personal-icon-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.experience-container {
+  display: grid;
+  gap: 20px 10px;
+  justify-items: center;
+  align-items: center;
+  grid-template-columns: 1fr 5fr;
 }
 
 .visible {
@@ -13,8 +84,4 @@
 
 .hidden {
   transform: translateY(-100%);
-}
-
-.resume-container > h2 {
-  color: red;
 }
