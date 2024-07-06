@@ -47,7 +47,17 @@ function Resume({ formData, isActive, experienceData, educationData }) {
     <div className="experience-container">
       {educationData.map((section) => {
         return section.map((field) => {
-          return <p key={field.id}>{field.value}</p>;
+          if (!Array.isArray(field.value)) {
+            return <p key={field.id}>{field.value}</p>;
+          } else {
+            return (
+              <ul key={field.id}>
+                {field.value.map((value, index) => {
+                  return <li key={index}>{value}</li>;
+                })}
+              </ul>
+            );
+          }
         });
       })}
     </div>
@@ -57,7 +67,17 @@ function Resume({ formData, isActive, experienceData, educationData }) {
     <div className="experience-container">
       {experienceData.map((section) => {
         return section.map((field) => {
-          return <p key={field.id}>{field.value}</p>;
+          if (!Array.isArray(field.value)) {
+            return <p key={field.id}>{field.value}</p>;
+          } else {
+            return (
+              <ul key={field.id}>
+                {field.value.map((value, index) => {
+                  return <li key={index}>{value}</li>;
+                })}
+              </ul>
+            );
+          }
         });
       })}
     </div>
