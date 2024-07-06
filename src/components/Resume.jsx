@@ -1,11 +1,21 @@
+import { useState } from "react";
 import emailIcon from "../assets/email.svg";
 import phoneIcon from "../assets/phone.svg";
 import locationIcon from "../assets/location.svg";
 import "../styles/Resume.css";
 
-//TODO: style resume and add an edit functionality
-
+// TODO: style resume and add an edit functionality
 function Resume({ formData, isActive, experienceData, educationData }) {
+  const [editSection, setEditSection] = useState(null);
+
+  function enableEdit(sectionId) {
+    setEditSection(sectionId);
+  }
+
+  function disableEdit() {
+    setEditSection(null);
+  }
+
   const resumeData = formData.map((section) => {
     if (section.title === "Personal Details") {
       let fullName = "";
@@ -41,47 +51,54 @@ function Resume({ formData, isActive, experienceData, educationData }) {
         </div>
       );
     }
+    return null;
   });
 
-  const educationElement = (
-    <div className="experience-container">
-      {educationData.map((section) => {
-        return section.map((field) => {
-          if (!Array.isArray(field.value)) {
-            return <p key={field.id}>{field.value}</p>;
-          } else {
-            return (
-              <ul key={field.id}>
-                {field.value.map((value, index) => {
-                  return <li key={index}>{value}</li>;
-                })}
-              </ul>
-            );
-          }
-        });
-      })}
-    </div>
-  );
-
-  const experienceElement = (
-    <div className="experience-container">
-      {experienceData.map((section) => {
-        return section.map((field) => {
-          if (!Array.isArray(field.value)) {
-            return <p key={field.id}>{field.value}</p>;
-          } else {
-            return (
-              <ul key={field.id}>
-                {field.value.map((value, index) => {
-                  return <li key={index}>{value}</li>;
-                })}
-              </ul>
-            );
-          }
-        });
-      })}
-    </div>
-  );
+  function renderSection(arr, sectionTitle) {
+    return (
+      <div className="experience-container">
+        {arr.map((section, index) => {
+          console.log(sectionTitle);
+          console.log(index);
+          const isEditing = editSection === `${sectionTitle}-${index}`;
+          return (
+            <div key={index} className="experience-field-container">
+              <button
+                onClick={() => {
+                  isEditing ? disableEdit() : enableEdit(`${sectionTitle}-${index}`);
+                }}
+              >
+                {isEditing ? "Apply" : "Edit"}
+              </button>
+              {section.map((field) => {
+                if (!Array.isArray(field.value)) {
+                  return isEditing ? (
+                    <input value={field.value} key={field.id} />
+                  ) : (
+                    <p key={field.id}>{field.value}</p>
+                  );
+                } else {
+                  return (
+                    <ul key={field.id} className="resume-list-container">
+                      {field.value.map((value, index) =>
+                        isEditing ? (
+                          <li key={index}>
+                            <input value={value} type="text" />
+                          </li>
+                        ) : (
+                          <li key={index}>{value}</li>
+                        )
+                      )}
+                    </ul>
+                  );
+                }
+              })}
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
 
   return (
     <div className={`resume ${isActive ? "visible" : "hidden"}`}>
@@ -89,11 +106,11 @@ function Resume({ formData, isActive, experienceData, educationData }) {
         <div className="resume-section-container">{resumeData}</div>
         <div className="resume-section-container">
           <h2>Education</h2>
-          {educationElement}
+          {renderSection(educationData, "Education")}
         </div>
         <div className="resume-section-container">
           <h2>Experience</h2>
-          {experienceElement}
+          {renderSection(experienceData, "Experience")}
         </div>
       </div>
     </div>
