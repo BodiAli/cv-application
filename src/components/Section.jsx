@@ -14,11 +14,13 @@ function Input({ id, type, autoComplete, value, onChange }) {
   );
 }
 
-function Section({ section, onInputChange }) {
+function Section({ section, onAddListClick, onInputChange, listElements, onDelete }) {
   return (
     <section className="section">
       <h2 className="section-header">{section.title}</h2>
       {section.fields.map((field) => {
+        const fieldListElements = listElements[field.id] || [];
+
         return (
           <div key={field.id} className="field-container">
             <label htmlFor={field.id}>{field.label}</label>
@@ -33,11 +35,25 @@ function Section({ section, onInputChange }) {
                 }}
               />
               {field.canAdd && (
-                <button className="add-list-button">
+                <button type="button" onClick={() => onAddListClick(field)} className="add-list-button">
                   <img src={plusIcon} alt="Add List" />
                 </button>
               )}
             </div>
+            {field.canAdd && (
+              <ul className="list-container">
+                {fieldListElements.map((element, index) => {
+                  return (
+                    <div key={index}>
+                      <li>{element}</li>
+                      <button type="button" onClick={() => onDelete(field, element)}>
+                        Delete
+                      </button>
+                    </div>
+                  );
+                })}
+              </ul>
+            )}
           </div>
         );
       })}
