@@ -53,10 +53,11 @@ const formInformation = [
       {
         id: crypto.randomUUID(),
         label: "Major Achievements or Honors",
-        value: [],
+        value: "",
         type: "text",
         autoComplete: "section-achievements",
         canAdd: true,
+        arr: [],
       },
     ],
     id: crypto.randomUUID(),
@@ -88,10 +89,11 @@ const formInformation = [
       {
         id: crypto.randomUUID(),
         label: "Main Responsibilities",
-        value: [],
+        value: "",
         type: "text",
         autoComplete: "section-responsibilities",
         canAdd: true,
+        arr: [],
       },
     ],
     id: crypto.randomUUID(),
@@ -106,6 +108,13 @@ const educationArray = [
     { value: [], id: formInformation[1].fields[3].id },
   ],
 ];
-const experienceArray = [];
+const experienceArray = [
+  [
+    { value: "Company Name", id: formInformation[2].fields[0].id },
+    { value: "Position Title", id: formInformation[2].fields[1].id },
+    { value: "Date, From - To", id: formInformation[2].fields[2].id },
+    { value: [], id: formInformation[2].fields[3].id },
+  ],
+];
 
 export { educationArray, experienceArray, formInformation as default };
