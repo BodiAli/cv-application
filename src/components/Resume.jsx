@@ -4,8 +4,17 @@ import phoneIcon from "../assets/phone.svg";
 import locationIcon from "../assets/location.svg";
 import "../styles/Resume.css";
 
-// TODO: style resume and add an edit functionality
-function Resume({ formData, isActive, experienceData, educationData }) {
+function Resume({
+  formData,
+  isActive,
+  experienceData,
+  educationData,
+  handleEdit,
+  handleDeleteListItem,
+  handleDeleteSection,
+  setExperienceData,
+  setEducationData,
+}) {
   const [editSection, setEditSection] = useState(null);
 
   function enableEdit(sectionId) {
@@ -54,26 +63,31 @@ function Resume({ formData, isActive, experienceData, educationData }) {
     return null;
   });
 
-  function renderSection(arr, sectionTitle) {
+  function renderSection(arr, sectionTitle, setStateVariable) {
     return (
       <div className="experience-container">
         {arr.map((section, index) => {
-          console.log(sectionTitle);
-          console.log(index);
           const isEditing = editSection === `${sectionTitle}-${index}`;
           return (
             <div key={index} className="experience-field-container">
-              <button
-                onClick={() => {
-                  isEditing ? disableEdit() : enableEdit(`${sectionTitle}-${index}`);
-                }}
-              >
-                {isEditing ? "Apply" : "Edit"}
-              </button>
+              <div className="buttons-container">
+                <button
+                  onClick={() => {
+                    isEditing ? disableEdit() : enableEdit(`${sectionTitle}-${index}`);
+                  }}
+                >
+                  {isEditing ? "Apply" : "Edit"}
+                </button>
+                <button onClick={() => handleDeleteSection(section, arr, setStateVariable)}>Delete</button>
+              </div>
               {section.map((field) => {
                 if (!Array.isArray(field.value)) {
                   return isEditing ? (
-                    <input value={field.value} key={field.id} />
+                    <input
+                      onChange={(ev) => handleEdit(field, arr, setStateVariable, ev.target.value)}
+                      value={field.value}
+                      key={field.id}
+                    />
                   ) : (
                     <p key={field.id}>{field.value}</p>
                   );
@@ -83,7 +97,19 @@ function Resume({ formData, isActive, experienceData, educationData }) {
                       {field.value.map((value, index) =>
                         isEditing ? (
                           <li key={index}>
-                            <input value={value} type="text" />
+                            <input
+                              onChange={(ev) =>
+                                handleEdit(field, arr, setStateVariable, ev.target.value, index)
+                              }
+                              value={value}
+                              type="text"
+                            />
+                            <button
+                              onClick={() => handleDeleteListItem(field, arr, setStateVariable, index)}
+                              type="button"
+                            >
+                              Delete
+                            </button>
                           </li>
                         ) : (
                           <li key={index}>{value}</li>
@@ -106,11 +132,11 @@ function Resume({ formData, isActive, experienceData, educationData }) {
         <div className="resume-section-container">{resumeData}</div>
         <div className="resume-section-container">
           <h2>Education</h2>
-          {renderSection(educationData, "Education")}
+          {renderSection(educationData, "Education", setEducationData)}
         </div>
         <div className="resume-section-container">
           <h2>Experience</h2>
-          {renderSection(experienceData, "Experience")}
+          {renderSection(experienceData, "Experience", setExperienceData)}
         </div>
       </div>
     </div>
