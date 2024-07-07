@@ -4,12 +4,63 @@ import Resume from "./components/Resume";
 import formInformation, { educationArray, experienceArray } from "./data/information";
 import "./App.css";
 
+//TODO: Style project and try to implement form validation on lists
+
 function App() {
   const [formData, setFormData] = useState(formInformation);
   const [educationData, setEducationData] = useState(educationArray);
   const [experienceData, setExperienceData] = useState(experienceArray);
   const [isActive, setIsActive] = useState(false);
   const [listElements, setListElements] = useState({});
+
+  function handleEdit(buttonField, arr, setStateVariable, value, buttonFieldIndex) {
+    const updatedData = arr.map((section) => {
+      return section.map((field) => {
+        if (field.id === buttonField.id) {
+          if (Array.isArray(field.value)) {
+            return {
+              ...field,
+              value: field.value.map((val, index) => {
+                if (index === buttonFieldIndex) {
+                  return value;
+                }
+                return val;
+              }),
+            };
+          }
+
+          return { ...field, value };
+        }
+        return field;
+      });
+    });
+    setStateVariable(updatedData);
+  }
+
+  function handleDeleteSection(buttonSection, arr, setStateVariable) {
+    const index = arr.indexOf(buttonSection);
+
+    const copyArray = [...arr];
+
+    copyArray.splice(index, 1);
+
+    setStateVariable(copyArray);
+  }
+
+  function handleDeleteListItem(buttonField, arr, setStateVariable, buttonFieldIndex) {
+    const updatedData = arr.map((section) => {
+      return section.map((field) => {
+        if (field.id === buttonField.id && Array.isArray(field.value)) {
+          return {
+            ...field,
+            value: field.value.filter((_, index) => index !== buttonFieldIndex),
+          };
+        }
+        return field;
+      });
+    });
+    setStateVariable(updatedData);
+  }
 
   function onButtonClick() {
     setIsActive(!isActive);
@@ -66,9 +117,9 @@ function App() {
       function updateStates(section, stateVariable, setStateVariable) {
         const fieldValues = section.fields.map((field) => {
           if (field.arr) {
-            return { value: field.arr, id: field.id };
+            return { value: field.arr, id: crypto.randomUUID() };
           } else {
-            return { value: field.value, id: field.id };
+            return { value: field.value, id: crypto.randomUUID() };
           }
         });
         const isDuplicate = stateVariable.some((data) => {
@@ -134,8 +185,6 @@ function App() {
     });
 
     setFormData(initializeFormInputs);
-    // console.log(educationData);
-    // console.log(experienceData);
   }
 
   function onAddListClick(buttonField) {
@@ -179,6 +228,11 @@ function App() {
         listElements={listElements}
       />
       <Resume
+        setEducationData={setEducationData}
+        setExperienceData={setExperienceData}
+        handleEdit={handleEdit}
+        handleDeleteListItem={handleDeleteListItem}
+        handleDeleteSection={handleDeleteSection}
         educationData={educationData}
         experienceData={experienceData}
         isActive={isActive}
