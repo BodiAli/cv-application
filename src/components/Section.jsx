@@ -10,6 +10,7 @@ function Input({ id, type, autoComplete, value, onChange }) {
       autoComplete={autoComplete}
       value={value}
       onChange={onChange}
+      required
     ></input>
   );
 }
