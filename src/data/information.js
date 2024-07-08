@@ -105,7 +105,7 @@ const educationArray = [
     { value: "New York University", id: formInformation[1].fields[0].id },
     { value: "Bachelor of Arts in Economics", id: formInformation[1].fields[1].id },
     { value: "September 2015 - June 2017", id: formInformation[1].fields[2].id },
-    { value: [], id: formInformation[1].fields[3].id },
+    { value: ["Example"], id: formInformation[1].fields[3].id },
   ],
 ];
 const experienceArray = [
@@ -113,7 +113,7 @@ const experienceArray = [
     { value: "Company Name", id: formInformation[2].fields[0].id },
     { value: "Position Title", id: formInformation[2].fields[1].id },
     { value: "Date, From - To", id: formInformation[2].fields[2].id },
-    { value: [], id: formInformation[2].fields[3].id },
+    { value: ["Example"], id: formInformation[2].fields[3].id },
   ],
 ];
 
