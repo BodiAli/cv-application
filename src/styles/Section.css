@@ -77,13 +77,12 @@
   align-items: center;
 }
 
-/* TODO: Continue styling button (eg, font-size) */
-
 .list-container button {
   font-family: "Roboto", sans-serif;
   font-style: italic;
+  font-weight: 700;
   border: none;
-  padding: 5px;
+  padding: 4px;
   background-color: #d33b3b;
   border-radius: 3px;
   cursor: pointer;
