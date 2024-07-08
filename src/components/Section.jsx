@@ -1,7 +1,7 @@
 import plusIcon from "../assets/plus-icon.svg";
 import "../styles/Section.css";
 
-function Input({ id, type, autoComplete, value, onChange }) {
+function Input({ id, type, autoComplete, value, onChange, isRequired }) {
   return (
     <input
       className="input"
@@ -10,7 +10,7 @@ function Input({ id, type, autoComplete, value, onChange }) {
       autoComplete={autoComplete}
       value={value}
       onChange={onChange}
-      required
+      required={isRequired}
     ></input>
   );
 }
@@ -34,6 +34,7 @@ function Section({ section, onAddListClick, onInputChange, listElements, onDelet
                 onChange={(e) => {
                   onInputChange(section.id, field.id, e.target.value);
                 }}
+                isRequired={field.canAdd ? false : true}
               />
               {field.canAdd && (
                 <button type="button" onClick={() => onAddListClick(field)} className="add-list-button">
