@@ -4,13 +4,14 @@ import Resume from "./components/Resume";
 import formInformation, { educationArray, experienceArray } from "./data/information";
 import "./App.css";
 
-//TODO: Style project and try to implement form validation on lists
-
 function App() {
   const [formData, setFormData] = useState(formInformation);
   const [educationData, setEducationData] = useState(educationArray);
   const [experienceData, setExperienceData] = useState(experienceArray);
-  const [isActive, setIsActive] = useState(false);
+
+  const initialState = window.innerWidth >= 700;
+  const [isActive, setIsActive] = useState(initialState);
+
   const [listElements, setListElements] = useState({});
 
   function handleEdit(buttonField, arr, setStateVariable, value, buttonFieldIndex) {
@@ -113,6 +114,22 @@ function App() {
 
   function handleFormSubmit(ev) {
     ev.preventDefault();
+
+    let isValid = true;
+
+    formData.forEach((section) => {
+      section.fields.forEach((field) => {
+        if (field.canAdd && (!listElements[field.id] || listElements[field.id].length === 0)) {
+          isValid = false;
+          alert(`Please add at least one item to the ${field.label} list in the ${section.title} section.`);
+        }
+      });
+    });
+
+    if (!isValid) {
+      return;
+    }
+
     formData.forEach((section) => {
       function updateStates(section, stateVariable, setStateVariable) {
         const fieldValues = section.fields.map((field) => {
