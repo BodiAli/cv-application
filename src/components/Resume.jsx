@@ -2,6 +2,8 @@ import { useState } from "react";
 import emailIcon from "../assets/email.svg";
 import phoneIcon from "../assets/phone.svg";
 import locationIcon from "../assets/location.svg";
+import deleteIcon from "../assets/delete.svg";
+import editIcon from "../assets/edit.svg";
 import "../styles/Resume.css";
 
 function Resume({
@@ -69,21 +71,25 @@ function Resume({
         {arr.map((section, index) => {
           const isEditing = editSection === `${sectionTitle}-${index}`;
           return (
-            <div key={index} className="experience-field-container">
+            <div key={index} className={`experience-field-container${isEditing ? " edit" : ""}`}>
               <div className="buttons-container">
                 <button
+                  className={isEditing ? "apply-edit" : ""}
                   onClick={() => {
                     isEditing ? disableEdit() : enableEdit(`${sectionTitle}-${index}`);
                   }}
                 >
-                  {isEditing ? "Apply" : "Edit"}
+                  {isEditing ? "Apply" : <img src={editIcon} />}
                 </button>
-                <button onClick={() => handleDeleteSection(section, arr, setStateVariable)}>Delete</button>
+                <button onClick={() => handleDeleteSection(section, arr, setStateVariable)}>
+                  <img src={deleteIcon} alt="" />
+                </button>
               </div>
               {section.map((field) => {
                 if (!Array.isArray(field.value)) {
                   return isEditing ? (
                     <input
+                      name="field-value"
                       onChange={(ev) => handleEdit(field, arr, setStateVariable, ev.target.value)}
                       value={field.value}
                       key={field.id}
@@ -98,6 +104,7 @@ function Resume({
                         isEditing ? (
                           <li key={index}>
                             <input
+                              name="list-value"
                               onChange={(ev) =>
                                 handleEdit(field, arr, setStateVariable, ev.target.value, index)
                               }
@@ -112,7 +119,7 @@ function Resume({
                             </button>
                           </li>
                         ) : (
-                          <li key={index}>{value}</li>
+                          <li key={index}>- {value}</li>
                         )
                       )}
                     </ul>
