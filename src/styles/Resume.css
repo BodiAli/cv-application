@@ -20,6 +20,7 @@
   width: 100%;
   scrollbar-width: thin;
   scrollbar-color: #005b4b #f2f3cc;
+  flex-grow: 1;
 }
 
 .resume-container {

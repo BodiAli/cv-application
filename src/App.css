@@ -37,6 +37,11 @@
   gap: 70px;
 }
 
+#root {
+  display: flex;
+  flex-direction: column;
+}
+
 @media (min-width: 700px) {
   #root {
     display: flex;
