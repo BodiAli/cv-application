@@ -18,9 +18,9 @@
   overflow-y: auto;
   display: flex;
   width: 100%;
+  margin: 0 auto;
   scrollbar-width: thin;
   scrollbar-color: #005b4b #f2f3cc;
-  flex-grow: 1;
 }
 
 .resume-container {
