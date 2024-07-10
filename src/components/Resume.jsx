@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { usePDF } from "react-to-pdf";
 import emailIcon from "../assets/email.svg";
 import phoneIcon from "../assets/phone.svg";
 import locationIcon from "../assets/location.svg";
@@ -18,6 +19,8 @@ function Resume({
   setEducationData,
 }) {
   const [editSection, setEditSection] = useState(null);
+
+  const { toPDF, targetRef } = usePDF({ filename: "Resume.pdf" });
 
   function enableEdit(sectionId) {
     setEditSection(sectionId);
@@ -135,7 +138,7 @@ function Resume({
 
   return (
     <div className={`resume ${isActive ? "visible" : "hidden"}`}>
-      <div className="resume-container">
+      <div className="resume-container" ref={targetRef}>
         <div className="resume-section-container">{resumeData}</div>
         <div className="resume-section-container">
           <h2>Education</h2>
@@ -145,6 +148,9 @@ function Resume({
           <h2>Experience</h2>
           {renderSection(experienceData, "Experience", setExperienceData)}
         </div>
+        <button className="download-pdf" onClick={() => toPDF()}>
+          Download
+        </button>
       </div>
     </div>
   );
