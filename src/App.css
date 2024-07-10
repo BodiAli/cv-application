@@ -36,9 +36,16 @@
   flex-direction: column;
   gap: 70px;
 }
+#root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
 @media (min-width: 700px) {
   #root {
     display: flex;
+    flex-direction: row;
   }
 }
