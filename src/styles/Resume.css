@@ -17,6 +17,7 @@
   height: calc(100vh - 78px);
   overflow-y: auto;
   display: flex;
+  justify-content: center;
   width: 100%;
   scrollbar-width: thin;
   scrollbar-color: #005b4b #f2f3cc;
