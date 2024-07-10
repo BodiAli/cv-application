@@ -45,5 +45,6 @@
 @media (min-width: 700px) {
   #root {
     display: flex;
+    flex-direction: row;
   }
 }
