@@ -130,41 +130,41 @@ function App() {
       return;
     }
 
-    formData.forEach((section) => {
-      function updateStates(section, stateVariable, setStateVariable) {
-        const fieldValues = section.fields.map((field) => {
-          if (field.arr) {
-            return { value: field.arr, id: crypto.randomUUID() };
-          } else {
-            return { value: field.value, id: crypto.randomUUID() };
-          }
-        });
-        const isDuplicate = stateVariable.some((data) => {
-          return (
-            data.length === fieldValues.length &&
-            data.every((obj, index) => {
-              if (!Array.isArray(obj.value)) {
-                return obj.value === fieldValues[index].value;
-              } else if (Array.isArray(obj.value)) {
-                if (obj.value.length !== fieldValues[index].value.length) {
-                  return false;
-                } else if (obj.value.length === 0 && fieldValues[index].value.length === 0) {
-                  return true;
-                } else {
-                  return obj.value.every((string, index2) => {
-                    return string === fieldValues[index].value[index2];
-                  });
-                }
-              }
-            })
-          );
-        });
-
-        if (!isDuplicate) {
-          setStateVariable((prevStateVariable) => [...prevStateVariable, fieldValues]);
+    function updateStates(section, stateVariable, setStateVariable) {
+      const fieldValues = section.fields.map((field) => {
+        if (field.arr) {
+          return { value: field.arr, id: crypto.randomUUID() };
+        } else {
+          return { value: field.value, id: crypto.randomUUID() };
         }
-      }
+      });
+      const isDuplicate = stateVariable.some((data) => {
+        return (
+          data.length === fieldValues.length &&
+          data.every((obj, index) => {
+            if (!Array.isArray(obj.value)) {
+              return obj.value === fieldValues[index].value;
+            } else if (Array.isArray(obj.value)) {
+              if (obj.value.length !== fieldValues[index].value.length) {
+                return false;
+              } else if (obj.value.length === 0 && fieldValues[index].value.length === 0) {
+                return true;
+              } else {
+                return obj.value.every((string, index2) => {
+                  return string === fieldValues[index].value[index2];
+                });
+              }
+            }
+          })
+        );
+      });
 
+      if (!isDuplicate) {
+        setStateVariable((prevStateVariable) => [...prevStateVariable, fieldValues]);
+      }
+    }
+
+    formData.forEach((section) => {
       if (section.title === "Education") {
         updateStates(section, educationData, setEducationData);
       } else if (section.title === "Experience") {
